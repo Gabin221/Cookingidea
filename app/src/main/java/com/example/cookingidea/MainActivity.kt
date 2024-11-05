@@ -1,6 +1,7 @@
 package com.example.cookingidea
 
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: RecipeAdapter
     private val apiKey = "use/your/api/key"
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -27,15 +29,14 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
 
         binding.button.setOnClickListener {
-            val numberOfRecipes = binding.editTextNumber.text.toString().toIntOrNull() ?: 0
-            val allergies = binding.editTextAllergies.text.toString()
+            val diet = binding.editTextDiet.text.toString()
             val ingredients = binding.editTextIngredients.text.toString()
-
-            getRecipes(ingredients, numberOfRecipes)
+            val timeFrame = binding.editTextTimeFrame.text.toString()
+            getRecipes(diet, ingredients, timeFrame)
         }
     }
 
-    private fun getRecipes(ingredients: String, number: Int) {
+    private fun getRecipes(diet: String, ingredients: String, timeFrame: String) {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.spoonacular.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -43,18 +44,25 @@ class MainActivity : AppCompatActivity() {
 
         val spoonacularApi = retrofit.create(SpoonacularApi::class.java)
 
-        spoonacularApi.getRecipes(ingredients, number, apiKey).enqueue(object : Callback<List<Recipe>> {
-            override fun onResponse(call: Call<List<Recipe>>, response: Response<List<Recipe>>) {
-                if (response.isSuccessful && response.body() != null) {
-                    adapter.setRecipes(response.body()!!)
-                } else {
-                    Toast.makeText(this@MainActivity, "No recipes found", Toast.LENGTH_SHORT).show()
+        spoonacularApi.getRecipes(diet, ingredients, timeFrame, apiKey)
+            .enqueue(object : Callback<MealResponse> {
+                override fun onResponse(call: Call<MealResponse>, response: Response<MealResponse>) {
+                    if (response.isSuccessful) {
+                        val mealResponse = response
+                        if (mealResponse != null) {
+                            adapter.setRecipes(mealResponse.body()?.meals)
+                        } else {
+                            Toast.makeText(this@MainActivity, "No recipes found", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this@MainActivity, "Failed to fetch recipes", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<List<Recipe>>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
+                override fun onFailure(call: Call<MealResponse>, t: Throwable) {
+                    Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
+
 }

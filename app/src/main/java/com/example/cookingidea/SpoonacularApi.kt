@@ -5,11 +5,12 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface SpoonacularApi {
-
-    @GET("recipes/findByIngredients")
+    @GET("mealplanner/generate")
     fun getRecipes(
-        @Query("ingredients") ingredients: String,
-        @Query("number") number: Int,
+        @Query("diet") diet: String,
+        @Query("exclude") ingredients: String,
+        @Query("timeFrame") timeFrame: String,
         @Query("apiKey") apiKey: String
-    ): Call<List<Recipe>>
+    ): Call<MealResponse>
+
 }

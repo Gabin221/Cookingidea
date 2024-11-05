@@ -2,7 +2,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingHorizontal="16dp"
     android:paddingVertical="5dp">
 
@@ -12,23 +11,25 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editTextNumber"
-            android:hint="Nombre de recettes"
-            android:inputType="number"
+            android:id="@+id/editTextDiet"
+            android:hint="Régime alimentaire"
+            android:text="omnivore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/editTextAllergies"
-            android:hint="Allergies (séparées par des virgules)"
+            android:id="@+id/editTextTimeFrame"
+            android:hint="Nombre de recettes"
+            android:text="daily"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"/>
 
         <EditText
             android:id="@+id/editTextIngredients"
-            android:hint="Ingrédients à inclure (séparés par des virgules)"
+            android:hint="Ingrédients à esclure (séparés par des virgules)"
+            android:text="tomatoes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"/>
@@ -48,5 +49,4 @@
             android:layout_marginTop="10dp"/>
 
     </LinearLayout>
-
 </ScrollView>
