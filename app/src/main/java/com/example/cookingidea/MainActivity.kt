@@ -1,6 +1,8 @@
 package com.example.cookingidea
 
 import android.os.Bundle
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,11 +20,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: RecipeAdapter
     private val apiKey = "use/your/api/key"
 
+    lateinit var resultats: TextView
+    lateinit var linearLayoutResultats: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        resultats = binding.root.findViewById(R.id.resultats)
+        linearLayoutResultats = binding.root.findViewById(R.id.linearLayoutResultats)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = RecipeAdapter()
@@ -51,6 +58,8 @@ class MainActivity : AppCompatActivity() {
                         val mealResponse = response
                         if (mealResponse != null) {
                             adapter.setRecipes(mealResponse.body()?.meals)
+                            resultats.visibility = View.VISIBLE
+                            linearLayoutResultats.visibility = View.VISIBLE
                         } else {
                             Toast.makeText(this@MainActivity, "No recipes found", Toast.LENGTH_SHORT).show()
                         }

@@ -5,6 +5,8 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -34,11 +36,10 @@ class RecipeAdapter : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
     inner class RecipeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val titleTextView: TextView = view.findViewById(R.id.recipeTitle)
-        private val linkTextView: TextView = view.findViewById(R.id.recipeUrl)
+        private val linkTextView: FrameLayout = view.findViewById(R.id.recipeUrl)
 
         fun bind(recipe: Recipe) {
             titleTextView.text = recipe.title
-            linkTextView.text = recipe.sourceUrl
             linkTextView.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(recipe.sourceUrl))
                 itemView.context.startActivity(intent)

@@ -7,46 +7,185 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editTextDiet"
-            android:hint="Régime alimentaire"
-            android:text="omnivore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:id="@+id/editTextTimeFrame"
-            android:hint="Nombre de recettes"
-            android:text="daily"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:id="@+id/editTextIngredients"
-            android:hint="Ingrédients à esclure (séparés par des virgules)"
-            android:text="tomatoes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
-
-        <Button
-            android:id="@+id/button"
-            android:text="Rechercher"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:text="Critères"
+            android:textColor="@color/grey"
+            android:paddingLeft="10dp"
+            android:textSize="13sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="16dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/square_button"
+            android:backgroundTint="@color/black"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="25dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:orientation="horizontal"
+                android:background="@drawable/ic_search_bar_background"
+                android:gravity="center_vertical">
+
+                <FrameLayout
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/jaune_fonce"
+                    android:background="@drawable/circle_background"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_diet"
+                        android:layout_gravity="center"/>
+
+                </FrameLayout>
+
+                <EditText
+                    android:id="@+id/editTextDiet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="régime alimentaire"
+                    android:text="omnivore"
+                    android:padding="10dp"
+                    android:background="@android:color/transparent"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:orientation="horizontal"
+                android:background="@drawable/ic_search_bar_background"
+                android:gravity="center_vertical">
+
+                <FrameLayout
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/jaune_fonce"
+                    android:background="@drawable/circle_background"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_daily"
+                        android:layout_gravity="center"/>
+
+                </FrameLayout>
+
+                <EditText
+                    android:id="@+id/editTextTimeFrame"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="day/week"
+                    android:text="daily"
+                    android:padding="10dp"
+                    android:background="@android:color/transparent"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:orientation="horizontal"
+                android:background="@drawable/ic_search_bar_background"
+                android:gravity="center_vertical">
+
+                <FrameLayout
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/jaune_fonce"
+                    android:background="@drawable/circle_background"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_food"
+                        android:layout_gravity="center"/>
+
+                </FrameLayout>
+
+                <EditText
+                    android:id="@+id/editTextIngredients"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Ingrédients à exclure (séparés par des virgules)"
+                    android:text="tomatoes"
+                    android:padding="10dp"
+                    android:background="@android:color/transparent"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <Button
+            android:id="@+id/button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Rechercher"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/ic_search"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="50dp"
+            android:backgroundTint="@color/jaune"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/resultats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Résultats"
+            android:textColor="@color/grey"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:visibility="invisible"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutResultats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/square_button"
+            android:backgroundTint="@color/black"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="15dp"
+            android:visibility="invisible"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
